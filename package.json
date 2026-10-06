@@ -1,0 +1,24 @@
+{
+  "name": "sr-elevadores-painel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel de operação do prédio — Situação real do webforge",
+  "type": "module",
+  "workspaces": ["packages/*", "apps/*"],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev -w @sr/api\" \"npm run dev -w @sr/web\"",
+    "build": "npm run build -w @sr/web",
+    "start": "npm run build && npm run start -w @sr/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "central": "node tools/central/cli.mjs painel"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "playwright": "1.61.1",
+    "typescript": "^5.8.3"
+  }
+}
